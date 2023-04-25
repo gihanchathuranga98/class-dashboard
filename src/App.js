@@ -1,27 +1,18 @@
-import { Grid } from '@mui/material';
 import './App.css';
-import Sidebar from './Elements/SIdebar/ResponsiveDrawer'
-import SimpleInfoCard from './Elements/SimpleInfoCard/SimpleInfoCard';
-import NewTextField from './Elements/TextFields/NewTextField';
+import Dashboard from './Owner/Dashboard/Dashboard';
+import Sidebar from './common/Elements/SIdebar/ResponsiveDrawer'
+import Login from './common/Pages/Login/Login';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <Sidebar>
-      <Grid container spacing={2}>
-                <Grid item lg={3} md={6} sm={6} xs={12}>
-                <SimpleInfoCard title={'Number of members'} value={2540} sx={{backgroundColor: 'secondary.light'}}/>
-                </Grid>
-                <Grid item lg={3} md={6} sm={6} xs={12}>
-                <SimpleInfoCard title={'Number of members'} value={2540} sx={{backgroundColor: 'warning.light'}}/>
-                </Grid>
-                <Grid item lg={3} md={6} sm={6} xs={12}>
-                <SimpleInfoCard title={'Number of members'} value={2540} sx={{backgroundColor: 'success.light'}}/>
-                </Grid>
-                <Grid item lg={3} md={6} sm={6} xs={12}>
-                <SimpleInfoCard title={'Number of members'} value={2540} sx={{backgroundColor: 'error.light'}}/>
-                </Grid>
-            </Grid>
-            <NewTextField label={'Testing New Text Field'} name={'textfield'} required={true} helper={'Required'} sx={{marginTop: 5}}/>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' exact element={<Login/>}/>
+        <Route path='/ownerdashboard' exact element={<Dashboard/>}/>
+      </Routes>
+    </BrowserRouter>
     </Sidebar>
   );
 }
