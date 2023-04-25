@@ -16,10 +16,14 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import { Link, useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
 function ResponsiveDrawer({window, children, title}) {
+
+  const nav = useNavigate();
+
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const web_title = title || "Revotech Solutions";
@@ -32,18 +36,33 @@ function ResponsiveDrawer({window, children, title}) {
     inbox: <InboxIcon />
   }
 
+  const navs = [
+    {
+      text: 'Login',
+      nav: '/'
+    },
+    {
+      text: 'Owner Dashboard',
+      nav: '/ownerdashboard'
+    },
+  ]
+
+  const handleClick = (index) => {
+    nav(index)
+  }
+
   const drawer = (
     <div>
       <Toolbar />
       {/* <Divider /> */}
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+        {navs.map((nav, index) => (
+          <ListItem key={nav.text} disablePadding>
+            <ListItemButton onClick={()=> handleClick(nav.nav)} id={index} key={index}>
               <ListItemIcon>
                 {index % 2 === 0 ? icon.inbox : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={nav.text}  />
             </ListItemButton>
           </ListItem>
         ))}
