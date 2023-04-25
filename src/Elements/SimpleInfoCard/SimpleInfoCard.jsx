@@ -17,7 +17,7 @@ const bull = (
 
 export default function SimpleInfoCard({title, value, sx}) {
   return (
-    <Card sx={sx}>
+    <Card raised sx={sx}>
       <CardContent>
         <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
           {title}
