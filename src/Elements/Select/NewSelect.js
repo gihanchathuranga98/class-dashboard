@@ -1,0 +1,41 @@
+import * as React from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Box } from '@mui/material';
+
+export default function NewSelect({none, value, err, label, id, key, name, children, helper}) {
+  const [age, setAge] = React.useState('');
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
+
+
+  return (
+      <>
+          <Box marginBottom={1}>
+            <FormControl fullWidth error={err} size='small'>
+                <InputLabel id={id}>{label}</InputLabel>
+                <Select
+                labelId={id}
+                key={key}
+                label={label}
+                name={name}
+                value={value || age}
+                id={id}
+                onChange={handleChange}
+                native
+                variant='outlined'
+                >
+                {none || false ? <option value=""></option> : null}
+                  {children}
+                </Select>
+                <FormHelperText>{helper}</FormHelperText>
+            </FormControl>
+          </Box>
+      </>
+  );
+}
