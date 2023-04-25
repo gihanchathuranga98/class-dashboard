@@ -1,8 +1,42 @@
 import React from 'react'
 import SimpleInfoCard from '../../common/Elements/SimpleInfoCard/SimpleInfoCard'
 import { Grid } from '@mui/material'
+import MyTable from './Table/Table'
+import data from './data.json'
 
 const Dashboard = () => {
+
+    const columns = [
+        {
+          Header: 'Institute ID',
+          accessor: 'id'
+        },
+        {
+          Header: 'Institute Name',
+          accessor: 'inst-name'
+        },
+        {
+          Header: 'Owner Name',
+          accessor: 'owner-name'
+        },
+        {
+          Header: 'Contact No.',
+          accessor: 'contact-no'
+        },
+        {
+          Header: 'Payment Type',
+          accessor: 'payment-type'
+        },
+        {
+          Header: 'Payment Date',
+          accessor: 'payment-date'
+        },
+        {
+          Header: 'Payment',
+          accessor: 'payment'
+        }
+      ]
+
   return (
     <>
         <Grid container spacing={2}>
@@ -19,6 +53,7 @@ const Dashboard = () => {
             <SimpleInfoCard title={'Number of members'} value={2540} sx={{backgroundColor: 'error.light'}}/>
             </Grid>
         </Grid>
+        <MyTable COLUMNS={columns} table_data={data} search_title={'Search Class'} />
     </>
   )
 }

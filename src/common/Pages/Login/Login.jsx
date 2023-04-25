@@ -7,6 +7,7 @@ import NewCheckbox from '../../Elements/Checkbox/NewCheckbox'
 const Login = () => {
   return (
     <>
+        <form>
         <FormElement title={'LOGIN'} sub={'Please fill all of the required fields.'} top={'12vh'}>
             <NewTextField label={'Username'} required id={'username'} name={'username'} placeholder={'abc@email.com'}/>
             <NewTextField label={'Password'} type={'password'} required id={'pwd'} name={'pwd'} placeholder={'Enter your password'}/>
@@ -18,6 +19,7 @@ const Login = () => {
             <Button fullWidth>Forgot password</Button>
             </Box>
         </FormElement>
+        </form>
     </>
   )
 }
