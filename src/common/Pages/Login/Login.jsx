@@ -7,7 +7,7 @@ import NewCheckbox from '../../Elements/Checkbox/NewCheckbox'
 const Login = () => {
   return (
     <>
-        <FormElement title={'LOGIN'} sub={'Please fill all of the required fields.'}>
+        <FormElement title={'LOGIN'} sub={'Please fill all of the required fields.'} top={'12vh'}>
             <NewTextField label={'Username'} required id={'username'} name={'username'} placeholder={'abc@email.com'}/>
             <NewTextField label={'Password'} type={'password'} required id={'pwd'} name={'pwd'} placeholder={'Enter your password'}/>
             <NewCheckbox label={'Remember me'} sx={{marginLeft: 1, marginTop: 0}}/>
