@@ -22,7 +22,7 @@ const NewTextField = ({type, id, value, label, placeholder, onChange, name, requ
 
   return (
     <>
-      <Box marginBottom={1.5}>
+      <Box marginTop={1.5}>
         <FormControl fullWidth>
             <TextField
                 id={id}
