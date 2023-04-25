@@ -2,6 +2,7 @@ import { Grid } from '@mui/material';
 import './App.css';
 import Sidebar from './Elements/SIdebar/ResponsiveDrawer'
 import SimpleInfoCard from './Elements/SimpleInfoCard/SimpleInfoCard';
+import NewTextField from './Elements/TextFields/NewTextField';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <SimpleInfoCard title={'Number of members'} value={2540} sx={{backgroundColor: 'error.light'}}/>
                 </Grid>
             </Grid>
+            <NewTextField label={'Testing New Text Field'} name={'textfield'} required={true} helper={'Required'} sx={{marginTop: 5}}/>
     </Sidebar>
   );
 }
