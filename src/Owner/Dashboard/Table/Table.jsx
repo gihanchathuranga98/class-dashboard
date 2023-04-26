@@ -5,7 +5,7 @@ import ColumnSelector from './ColumnSelector';
 import NewTextField from "../../../common/Elements/TextFields/NewTextField";
 import './Table.css'
 
-const DetailsTable = ({COLUMNS, table_data, search_title,}) => {
+const DetailsTable = ({COLUMNS, table_data, search_title, editHandler }) => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => table_data, []);
   const [values, setValues] = React.useState([]);
@@ -25,9 +25,9 @@ const DetailsTable = ({COLUMNS, table_data, search_title,}) => {
             Header: 'Options',
             Cell: ({row}) => (
               <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                <Button value={row} onClick={() => console.log(row.cells[0].value)} color={'error'}>Block</Button>
+                <Button value={row.cells[0].value} onClick={() => console.log(row.cells[0].value)} color={'error'}>Block</Button>
                 <Button>Remove</Button>
-                <Button color="warning">Edit</Button>
+                <Button value={row.cells[0].value} color="warning" onClick={ editHandler }>Edit</Button>
               </ButtonGroup>
             )
           }
