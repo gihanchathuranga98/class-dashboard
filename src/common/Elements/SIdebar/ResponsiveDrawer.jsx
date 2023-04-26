@@ -45,6 +45,10 @@ function ResponsiveDrawer({window, children, title}) {
       text: 'Owner Dashboard',
       nav: '/ownerdashboard'
     },
+    {
+      text: 'Add New Institute',
+      nav: '/owneraddnewinst'
+    },
   ]
 
   const handleClick = (index) => {

@@ -16,7 +16,7 @@ export default function NewSelect({none, value, err, label, id, key, name, child
 
   return (
       <>
-          <Box marginBottom={1}>
+          <Box marginTop={1.5}>
             <FormControl fullWidth error={err} size='small'>
                 <InputLabel id={id}>{label}</InputLabel>
                 <Select
