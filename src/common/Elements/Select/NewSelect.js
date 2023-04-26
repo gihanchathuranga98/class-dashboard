@@ -1,12 +1,11 @@
 import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Box } from '@mui/material';
 
-export default function NewSelect({none, value, err, label, id, key, name, children, helper}) {
+export default function NewSelect({none, value, err, label, id, key, name, children, helper, handleChangeProps}) {
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -26,7 +25,7 @@ export default function NewSelect({none, value, err, label, id, key, name, child
                 name={name}
                 value={value || age}
                 id={id}
-                onChange={handleChange}
+                onChange={handleChangeProps || handleChange}
                 native
                 variant='outlined'
                 >

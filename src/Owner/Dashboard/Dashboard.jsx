@@ -3,7 +3,7 @@ import SimpleInfoCard from "../../common/Elements/SimpleInfoCard/SimpleInfoCard"
 import { Button, Grid, Typography } from "@mui/material";
 import MyTable from "./Table/Table";
 import data from "./data.json";
-import EditDetailsPopup from "./EditDetailsPopup/EditDetailsPopup";
+import EditDetailsPopup from "../../common/Elements/EditDetailsPopup/EditDetailsPopup";
 import NewTextField from "../../common/Elements/TextFields/NewTextField";
 
 const Dashboard = () => {
