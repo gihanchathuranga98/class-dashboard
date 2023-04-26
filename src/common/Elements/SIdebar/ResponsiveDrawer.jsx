@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -49,6 +49,14 @@ function ResponsiveDrawer({window, children, title}) {
       text: 'Add New Institute',
       nav: '/owneraddnewinst'
     },
+    {
+      text: 'List of Super Admins',
+      nav: '/ownerlistofsuperadmins'
+    },
+    {
+      text: 'Create Super Admins',
+      nav: '/ownercreatesuperadmin'
+    },
   ]
 
   const handleClick = (index) => {
@@ -66,7 +74,7 @@ function ResponsiveDrawer({window, children, title}) {
               <ListItemIcon>
                 {index % 2 === 0 ? icon.inbox : <MailIcon />}
               </ListItemIcon>
-              <ListItemText primary={nav.text}  />
+              <ListItemText primary={nav.text} secondary={'secondary'}  />
             </ListItemButton>
           </ListItem>
         ))}
