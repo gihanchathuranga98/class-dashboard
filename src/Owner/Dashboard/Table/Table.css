@@ -37,3 +37,8 @@
     position: relative;
     top: 13px;
   }
+
+  .tableDiv {
+    overflow-x:auto;
+    max-width: 90vw;
+  }
