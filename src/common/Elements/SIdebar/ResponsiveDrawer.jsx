@@ -57,6 +57,10 @@ function ResponsiveDrawer({window, children, title}) {
       text: 'Create Super Admins',
       nav: '/ownercreatesuperadmin'
     },
+    {
+      text: 'Change Password',
+      nav: '/changepassword'
+    },
   ]
 
   const handleClick = (index) => {

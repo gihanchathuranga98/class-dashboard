@@ -4,6 +4,7 @@ import AddNewSuperadmin from './Owner/AddNewSuperadmin/AddNewSuperadmin';
 import Dashboard from './Owner/Dashboard/Dashboard';
 import ListOfSuperAdmins from './Owner/ListOfSuperAdmins/ListOfSuperAdmins';
 import Sidebar from './common/Elements/SIdebar/ResponsiveDrawer'
+import ChangePassword from './common/Pages/ChangePassword/ChangePassword';
 import Login from './common/Pages/Login/Login';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
 
@@ -17,6 +18,7 @@ function App() {
           <Route path='/owneraddnewinst' exact element={<AddNewInstitute/>}/>
           <Route path='/ownercreatesuperadmin' exact element={<AddNewSuperadmin/>}/>
           <Route path='/ownerlistofsuperadmins' exact element={<ListOfSuperAdmins/>}/>
+          <Route path='/changepassword' exact element={<ChangePassword/>}/>
         </Routes>
       </Sidebar>
     </BrowserRouter>
