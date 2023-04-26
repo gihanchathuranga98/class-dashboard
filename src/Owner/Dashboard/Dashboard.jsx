@@ -1,6 +1,6 @@
 import React from 'react'
 import SimpleInfoCard from '../../common/Elements/SimpleInfoCard/SimpleInfoCard'
-import { Grid } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import MyTable from './Table/Table'
 import data from './data.json'
 
@@ -53,7 +53,8 @@ const Dashboard = () => {
             <SimpleInfoCard title={'Number of members'} value={2540} sx={{backgroundColor: 'error.light'}}/>
             </Grid>
         </Grid>
-        <MyTable COLUMNS={columns} table_data={data} search_title={'Search Class'} />
+        <Typography variant='h5' sx={{marginTop: 5}}>Details of Institutes</Typography>
+        <MyTable COLUMNS={columns} table_data={data} search_title={'Search Institutes'} />
     </>
   )
 }

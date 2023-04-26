@@ -5,7 +5,7 @@ import ColumnSelector from './ColumnSelector';
 import NewTextField from "../../../common/Elements/TextFields/NewTextField";
 import './Table.css'
 
-const DetailsTable = ({COLUMNS, table_data, search_title, options}) => {
+const DetailsTable = ({COLUMNS, table_data, search_title,}) => {
   const columns = useMemo(() => COLUMNS, []);
   const data = useMemo(() => table_data, []);
   const [values, setValues] = React.useState([]);
