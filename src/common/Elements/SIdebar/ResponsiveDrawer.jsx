@@ -61,6 +61,10 @@ function ResponsiveDrawer({window, children, title}) {
       text: 'Change Password',
       nav: '/changepassword'
     },
+    {
+      text: 'S. A. Dashboard',
+      nav: '/superadmin/dashboard'
+    },
   ]
 
   const handleClick = (index) => {
