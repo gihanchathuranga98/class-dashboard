@@ -7,6 +7,7 @@ import Sidebar from './common/Elements/SIdebar/ResponsiveDrawer'
 import ChangePassword from './common/Pages/ChangePassword/ChangePassword';
 import Login from './common/Pages/Login/Login';
 import { BrowserRouter, Route, Router, Routes } from 'react-router-dom';
+import SuperAdminDashboard from './SuperAdmin/SuperAdminDashboard/SuperAdminDashboard'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/ownercreatesuperadmin' exact element={<AddNewSuperadmin/>}/>
           <Route path='/ownerlistofsuperadmins' exact element={<ListOfSuperAdmins/>}/>
           <Route path='/changepassword' exact element={<ChangePassword/>}/>
+          <Route path='/superadmin/dashboard' exact element={<SuperAdminDashboard/>}/>
         </Routes>
       </Sidebar>
     </BrowserRouter>
