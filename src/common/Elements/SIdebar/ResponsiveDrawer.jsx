@@ -65,6 +65,26 @@ function ResponsiveDrawer({window, children, title}) {
       text: 'S. A. Dashboard',
       nav: '/superadmin/dashboard'
     },
+    {
+      text: 'S. A. All Classes',
+      nav: '/superadmin/allclasses'
+    },
+    {
+      text: 'Chem Class',
+      nav: 'superadmin/class/10'
+    },
+    {
+      text: 'Add New Teacher',
+      nav: '/superadmin/addnewteacher'
+    },
+    {
+      text: 'Add New Student',
+      nav: '/superadmin/addnewstudent'
+    },
+    {
+      text: 'Add New Student B.',
+      nav: '/superadmin/addstudenttoclass'
+    }
   ]
 
   const handleClick = (index) => {

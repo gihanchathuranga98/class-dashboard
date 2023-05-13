@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "inst-name": "Revotech Solutions",
+        "owner-name": "Gihan Chathuranga",
+        "contact-no": "0775179587",
+        "payment-type": "One Time",
+        "payment": "50000",
+        "payment-date": "31/04/2023"
+    },
+    {
+        "id": 2,
+        "inst-name": "Mambek Solutions",
+        "owner-name": "Mambek Team",
+        "contact-no": "0776435664",
+        "payment-type": "Monthly",
+        "payment": "5000",
+        "payment-date": "25/04/2023"
+    }
+]
