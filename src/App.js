@@ -14,6 +14,10 @@ import AddNewTeacher from './common/Pages/AddNewTeacher/AddNewTeacher';
 import AddNewClass from './common/Pages/AddNewClass/AddNewClass';
 import AddNewStudent from './common/Pages/AddNewStudent/AddNewStudent';
 import AddStudentToClass from './common/Pages/AddStudentToClass/AddStudentToClass';
+import MarkAttendanceBarcode from './common/Pages/MarkAttendanceBarcode/MarkAttendanceBarcode';
+import MarkPaymentsBarcode from './common/Pages/MarkPaymentsBarcode/MarkPaymentsBarcode';
+import AddNewAdmin from './SuperAdmin/AddNewAdmin/AddNewAdmin';
+import JustAddNewStudent from './common/Pages/JustAddNewStudent/JustAddNewStudent';
 
 function App() {
   return (
@@ -34,6 +38,9 @@ function App() {
           <Route path='/superadmin/addnewclass' exact element={<AddNewClass/>}/>
           <Route path='/superadmin/addnewstudent' exact element={<AddNewStudent/>}/>
           <Route path='/superadmin/addstudenttoclass' exact element={<AddStudentToClass/>}/>
+          <Route path='/superadmin/markattendancebarcode' exact element={<MarkAttendanceBarcode/>}/>
+          <Route path='/superadmin/markpaymentbarcode' exact element={<MarkPaymentsBarcode/>}/>
+          <Route path='/superadmin/addnewadmin' exact element={<AddNewAdmin/>}/>
         </Routes>
       </Sidebar>
     </BrowserRouter>

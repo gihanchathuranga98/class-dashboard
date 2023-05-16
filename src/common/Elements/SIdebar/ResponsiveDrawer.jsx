@@ -18,7 +18,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 function ResponsiveDrawer({window, children, title}) {
 
@@ -84,6 +84,14 @@ function ResponsiveDrawer({window, children, title}) {
     {
       text: 'Add New Student B.',
       nav: '/superadmin/addstudenttoclass'
+    },
+    {
+      text: 'Attendace Barcode',
+      nav: '/superadmin/markattendancebarcode'
+    },
+    {
+      text: 'Payment Barcode',
+      nav: '/superadmin/markpaymentbarcode'
     }
   ]
 

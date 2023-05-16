@@ -3,6 +3,8 @@ import FormElement from '../../Elements/FormElement/FormElement'
 import NewTextField from '../../Elements/TextFields/NewTextField'
 import NewSelect from '../../Elements/Select/NewSelect'
 import { Button, Grid } from '@mui/material'
+import NewDatePicker from '../../Elements/NewDatePicker/NewDatePicker'
+import NewTimePicker from '../../Elements/NewTimePicker/NewTimePicker'
 
 const AddNewClass = () => {
   return (
@@ -18,9 +20,9 @@ const AddNewClass = () => {
                 <option>Sunday</option>
                 <option>Monday</option>
             </NewSelect>
-            <NewTextField label={'Class start time'}/>
-            <NewTextField label={'Class end time'}/>
-            <NewTextField label={'Class fee'}/>
+            <NewTimePicker label={'Class Start Time'}/>
+            <NewTimePicker label={'Class End Time'}/>
+            <NewTextField label={'Class fee'} type={'number'}/>
             <NewTextField label={'Class commition'}/>
             <Grid container spacing={2} marginY={1}>
                 <Grid item xs={6}>

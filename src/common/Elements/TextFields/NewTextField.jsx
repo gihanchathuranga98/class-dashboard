@@ -30,7 +30,6 @@ const NewTextField = ({type, id, value, label, placeholder, onChange, name, requ
                 value={value}
                 label={label}
                 fullWidth
-                size="small"
                 placeholder={placeholder}
                 name={name}
                 variant="outlined"
@@ -40,6 +39,7 @@ const NewTextField = ({type, id, value, label, placeholder, onChange, name, requ
                 required={required}
                 disabled={disabled}
                 sx={sx}
+                size="small"
                 
             />
             {helper && <FormHelperText error={err}>{helper}</FormHelperText>}
