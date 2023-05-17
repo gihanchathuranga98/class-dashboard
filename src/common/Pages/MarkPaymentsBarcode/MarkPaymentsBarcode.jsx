@@ -9,10 +9,10 @@ const MarkPaymentsBarcode = () => {
   return (
     <>
         <form>
-            <FormElement title={'Mark Attendance'} sub={'Plese enter the barcode number.'} top={'10vh'}>
+            <FormElement title={'Mark Attendance'} sub={'Pleace enter the barcode number.'} top={'10vh'}>
                 <NewTextField label={'Payment Period'} value={'2023, May'} disabled/>
-                <Button variant='contained' fullWidth sx={{marginTop: 1.5}} disableElevation>PAID</Button>
-                <br/>
+                <Button variant='contained' fullWidth sx={{marginTop: 1.5}} disabled disableElevation disableRipple disableFocusRipple disableTouchRipple>Student is not selected</Button>
+                <br/><br/>
                 <NewSelect none label={'Select Teacher'}>
                     <option>Gihan</option>
                     <option>Attanayake</option>

@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { Box } from '@mui/material';
 
-export default function NewSelect({none, value, err, label, id, key, name, children, helper, handleChangeProps}) {
+export default function NewSelect({none, value, err, label, id, key, name, children, helper, onChange}) {
   const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
@@ -25,7 +25,7 @@ export default function NewSelect({none, value, err, label, id, key, name, child
                 name={name}
                 value={value || age}
                 id={id}
-                onChange={handleChangeProps || handleChange}
+                onChange={onChange || handleChange}
                 native
                 variant='outlined'
                 >

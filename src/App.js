@@ -18,6 +18,7 @@ import MarkAttendanceBarcode from './common/Pages/MarkAttendanceBarcode/MarkAtte
 import MarkPaymentsBarcode from './common/Pages/MarkPaymentsBarcode/MarkPaymentsBarcode';
 import AddNewAdmin from './SuperAdmin/AddNewAdmin/AddNewAdmin';
 import JustAddNewStudent from './common/Pages/JustAddNewStudent/JustAddNewStudent';
+import NewTable from './common/Pages/NewTable/NewTable';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path='/superadmin/markattendancebarcode' exact element={<MarkAttendanceBarcode/>}/>
           <Route path='/superadmin/markpaymentbarcode' exact element={<MarkPaymentsBarcode/>}/>
           <Route path='/superadmin/addnewadmin' exact element={<AddNewAdmin/>}/>
+          <Route path='/newtable' exact element={<NewTable/>}/>
         </Routes>
       </Sidebar>
     </BrowserRouter>
