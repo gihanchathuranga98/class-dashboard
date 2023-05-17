@@ -11,7 +11,7 @@ const MarkPaymentsBarcode = () => {
         <form>
             <FormElement title={'Mark Attendance'} sub={'Plese enter the barcode number.'} top={'10vh'}>
                 <NewTextField label={'Payment Period'} value={'2023, May'} disabled/>
-                <Button variant='contained' fullWidth sx={{marginTop: 1.5}}>PAID</Button>
+                <Button variant='contained' fullWidth sx={{marginTop: 1.5}} disableElevation>PAID</Button>
                 <NewSelect none label={'Select Teacher'}>
                     <option>Gihan</option>
                     <option>Attanayake</option>
@@ -21,6 +21,7 @@ const MarkPaymentsBarcode = () => {
                     <option>Attanayake</option>
                 </NewSelect>
                 <NewTextField label={'Barcode'}/>
+                <br/>
                 <Grid container spacing={2} marginY={1}>
                     <Grid item xs={12} md={6}>
                         <Button variant='outlined' fullWidth>Clear</Button>
