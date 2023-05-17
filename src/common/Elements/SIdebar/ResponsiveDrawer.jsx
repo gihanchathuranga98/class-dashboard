@@ -96,6 +96,10 @@ function ResponsiveDrawer({window, children, title}) {
     {
       text: 'Add New Class',
       nav: '/superadmin/addnewclass'
+    },
+    {
+      text: 'New MUI Table',
+      nav: '/newtable'
     }
   ]
 
