@@ -18,7 +18,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 function ResponsiveDrawer({window, children, title}) {
 
@@ -65,6 +65,34 @@ function ResponsiveDrawer({window, children, title}) {
       text: 'S. A. Dashboard',
       nav: '/superadmin/dashboard'
     },
+    {
+      text: 'S. A. All Classes',
+      nav: '/superadmin/allclasses'
+    },
+    {
+      text: 'Chem Class',
+      nav: 'superadmin/class/10'
+    },
+    {
+      text: 'Add New Teacher',
+      nav: '/superadmin/addnewteacher'
+    },
+    {
+      text: 'Add New Student',
+      nav: '/superadmin/addnewstudent'
+    },
+    {
+      text: 'Add New Student B.',
+      nav: '/superadmin/addstudenttoclass'
+    },
+    {
+      text: 'Attendace Barcode',
+      nav: '/superadmin/markattendancebarcode'
+    },
+    {
+      text: 'Payment Barcode',
+      nav: '/superadmin/markpaymentbarcode'
+    }
   ]
 
   const handleClick = (index) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import SimpleInfoCard from '../../common/Elements/SimpleInfoCard/SimpleInfoCard'
-import { Card, Grid } from '@mui/material'
+import { Card, CardHeader, Grid, Typography } from '@mui/material'
 import LineChart from '../../common/Elements/LineChart/LineChart'
 
 const Dashboard = () => {
@@ -39,11 +39,13 @@ const Dashboard = () => {
         <Grid container spacing={2} marginY={2}>
             <Grid item xs={12}  lg={6}>
                 <Card elevation={5} sx={{padding: 2}}>
+                    <Typography color={'#000'} variant='h5'>Total Income</Typography>
                     <LineChart/>
                 </Card>
             </Grid>
             <Grid item xs={12}  lg={6}>
                 <Card elevation={5} sx={{padding: 2}}>
+                    <Typography color={'#000'} variant='h5'>Total Students</Typography>
                     <LineChart/>
                 </Card>
             </Grid>
