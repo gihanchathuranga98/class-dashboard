@@ -92,6 +92,10 @@ function ResponsiveDrawer({window, children, title}) {
     {
       text: 'Payment Barcode',
       nav: '/superadmin/markpaymentbarcode'
+    },
+    {
+      text: 'Add New Class',
+      nav: '/superadmin/addnewclass'
     }
   ]
 
