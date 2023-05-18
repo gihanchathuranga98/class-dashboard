@@ -3,10 +3,10 @@ import NewTable from '../NewTable/NewTable';
 import { Button, ButtonGroup, Grid, Typography } from '@mui/material';
 import NewSelect from '../../Elements/Select/NewSelect';
 
-const AddStudentToClassManual = () => {
+const MarkAttendanceManual = () => {
 
     const getElements = (params) => {
-        return <Button variant='contained' color='primary' onClick={()=>{console.log(params.id)}}>Assign</Button>
+        return <Button variant='contained' color='success' onClick={()=>{console.log(params.id)}}>Attended</Button>
     }
 
     const rows = [
@@ -25,7 +25,7 @@ const AddStudentToClassManual = () => {
   return (
     <>
         <Typography variant="h5" sx={{ marginTop: 2 }}>
-            Add Students to Classes
+            Mark Attendance
         </Typography>
         <Grid container marginY={2} spacing={1}>
             <Grid item marginLeft={'auto'} xs={6} md={3}>
@@ -47,4 +47,4 @@ const AddStudentToClassManual = () => {
   )
 }
 
-export default AddStudentToClassManual;
+export default MarkAttendanceManual;

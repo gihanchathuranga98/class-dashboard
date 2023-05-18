@@ -3,16 +3,22 @@ import NewTable from '../NewTable/NewTable';
 import { Button, ButtonGroup, Grid, Typography } from '@mui/material';
 import NewSelect from '../../Elements/Select/NewSelect';
 
-const AddStudentToClassManual = () => {
+const MarkPaymentManual = () => {
 
     const getElements = (params) => {
-        return <Button variant='contained' color='primary' onClick={()=>{console.log(params.id)}}>Assign</Button>
+        var payment;
+        if(params.row.stat === 'paid'){
+            payment = 'PAID'
+        }else{
+            payment = 'NOT-PAID'
+        }
+        return <Button variant='contained' disabled={payment === 'PAID'? false : true} color='success' onClick={()=>{console.log(params.id)}}>{payment}</Button>
     }
 
     const rows = [
-        { id: 1, name: 'Gihan Attanayake', mobile: '0775179587', final: 'attanayake', pay: 'not paid', address: 'whoknows',bday: '1998-04-29' },
-        { id: 3, name: 'Gihan Chathuranga', mobile: '0716387197', final: 'attanayake', pay: 'not paid', address: 'whoknows',bday: '2001-07-19' },
-        { id: 5, name: 'Pamudi Bhagya', mobile: '0761813970', final: 'attanayake', pay: 'not paid', address: 'whoknows',bday: '1998-05-16' },
+        { id: 1, name: 'Gihan Attanayake', mobile: '0775179587', final: 'attanayake', pay: 'not paid', address: 'whoknows',bday: '1998-04-29',stat: 'paid' },
+        { id: 3, name: 'Gihan Chathuranga', mobile: '0716383327', final: 'attanayake', pay: 'not paid', address: 'whoknows',bday: '2001-07-19', stat: 'not-paid' },
+        { id: 5, name: 'Pamudi Bhagya', mobile: '0761813970', final: 'attanayake', pay: 'not paid', address: 'whoknows',bday: '1998-05-16', stat: 'paid' },
     ];
     
     const columns = [
@@ -25,7 +31,7 @@ const AddStudentToClassManual = () => {
   return (
     <>
         <Typography variant="h5" sx={{ marginTop: 2 }}>
-            Add Students to Classes
+            Mark Payments
         </Typography>
         <Grid container marginY={2} spacing={1}>
             <Grid item marginLeft={'auto'} xs={6} md={3}>
@@ -47,4 +53,4 @@ const AddStudentToClassManual = () => {
   )
 }
 
-export default AddStudentToClassManual;
+export default MarkPaymentManual;
