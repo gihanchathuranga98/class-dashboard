@@ -9,7 +9,7 @@ import NewTimePicker from '../../Elements/NewTimePicker/NewTimePicker'
 const AddNewClass = () => {
   return (
     <>
-        <FormElement title={'Add New Class'} sub={'Please select all of the required fields'} top={'5vh'}>
+        <FormElement title={'Add New Class 2'} sub={'Please select all of the required fields'} top={'5vh'}>
             <NewSelect label={'Select a Teacher'} none>
                 <option>Gihan Chathuranga</option>
                 <option>Gihan Attanayake</option>

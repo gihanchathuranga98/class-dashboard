@@ -3,3 +3,12 @@
     color: white;
     font-weight: bolder !important;
 }
+
+
+
+@media only screen and (max-width: 900px){
+    .datadiv{
+        max-width: calc(100vw - 50px);
+        overflow: auto;
+    }
+}
