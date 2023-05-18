@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
-import { Button, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import './NewTable.css'
 import NewTextField from '../../Elements/TextFields/NewTextField';
 import NewSelect from '../../Elements/Select/NewSelect';
 
 
-const NewTable = () => {
+const NewTable = ({rows, columns}) => {
+
+    const memo_rows = React.useMemo(()=> rows);
+    const memo_columns = React.useMemo(()=> columns);
+
 
     const [value, setValue] = React.useState('');
     const [selectedCol, setSelectedCol] = React.useState();
@@ -17,23 +21,6 @@ const NewTable = () => {
         }
         setSelectedCol(event.target.value)
     }
-
-    var rows = [
-        { id: 1, col1: 'Hello', col2: 'World', name: 'gihan', final: 'attanayake', pay: 'not paid', address: 'whoknows'},
-        { id: 3, col1: 'DataGridPro', col2: 'is Awesome', name: 'gihan', final: 'attanayake', pay: 'not paid', address: 'whoknows' },
-        { id: 5, col1: 'MUI', col2: 'is Amazing', name: 'gihan', final: 'attanayake', pay: 'not paid', address: 'whoknows' },
-      ];
-      
-      const columns = [
-        { field: 'id', headerName: <strong>ID</strong>, hideable: true, width: 200, headerClassName: 'table-header' },
-        { field: 'col1', headerName: 'Column 1', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
-        { field: 'col2', headerName: 'Column 2', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
-        { field: 'name', headerName: 'Name', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
-        { field: 'final', headerName: 'Final', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
-        { field: 'pay', headerName: 'Payment', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
-        { field: 'address', headerName: 'Address', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
-        { field: 'settings', headerName: 'Settings', minWidth: 200, hideable: true, renderCell: (params)=> (<Button variant='contained' color='warning' onClick={()=>{console.log(params.id)}}>Update</Button>), headerClassName: 'table-header' },
-      ];
 
       const items = [
         {field: selectedCol, operator: 'contains', value: value}
@@ -55,10 +42,23 @@ const NewTable = () => {
             </Grid>
         </Grid>
         <div className='datadiv' >
-        <DataGrid autoHeight rows={rows} columns={columns} slots={{toolbar: GridToolbar}} filterModel={{items}}/>
+        <DataGrid autoHeight rows={memo_rows} columns={memo_columns} slots={{toolbar: GridToolbar}} filterModel={{items}}/>
         </div>
     </>
   )
 }
 
 export default NewTable;
+
+// const rows = [
+//     { id: 1, col1: 'Hello', col2: 'World', name: 'gihan', final: 'attanayake', pay: 'not paid', address: 'whoknows'},
+//     { id: 3, col1: 'DataGridPro', col2: 'is Awesome', name: 'gihan', final: 'attanayake', pay: 'not paid', address: 'whoknows' },
+//     { id: 5, col1: 'MUI', col2: 'is Amazing', name: 'gihan', final: 'attanayake', pay: 'not paid', address: 'whoknows' },
+//   ];
+  
+//   const columns = [
+//     { field: 'id', headerName: <strong>ID</strong>, width: 200, headerClassName: 'table-header', flex: 1 },
+//     { field: 'col1', headerName: 'Column 1', minWidth: 200, headerClassName: 'table-header', flex: 1  },
+//     { field: 'address', headerName: 'Address', minWidth: 200, headerClassName: 'table-header', flex: 1  },
+//     { field: 'settings', headerName: 'Settings', minWidth: 200, renderCell: (params)=> (<Button variant='contained' color='warning' onClick={()=>{console.log(params.id)}}>Update</Button>), headerClassName: 'table-header', flex: 1 },
+//   ];
