@@ -12,7 +12,9 @@ const NewTable = () => {
     const [selectedCol, setSelectedCol] = React.useState();
 
     const handleSelect = (event) => {
-        document.getElementById('filter').focus()
+        if(event.target.value !== ''){
+            document.getElementById('filter').focus()
+        }
         setSelectedCol(event.target.value)
     }
 
@@ -23,14 +25,14 @@ const NewTable = () => {
       ];
       
       const columns = [
-        { field: 'id', headerName: <strong>ID</strong>, hideable: true, width: 200, headerClassName: 'table-header', flex: 1 },
-        { field: 'col1', headerName: 'Column 1', width: 200, hideable: true, headerClassName: 'table-header', flex: 1  },
-        { field: 'col2', headerName: 'Column 2', width: 200, hideable: true, headerClassName: 'table-header', flex: 1  },
-        { field: 'name', headerName: 'Name', width: 200, hideable: true, headerClassName: 'table-header', flex: 1  },
-        { field: 'final', headerName: 'Final', width: 200, hideable: true, headerClassName: 'table-header', flex: 1  },
-        { field: 'pay', headerName: 'Payment', width: 200, hideable: true, headerClassName: 'table-header', flex: 1  },
-        { field: 'address', headerName: 'Address', width: 200, hideable: true, headerClassName: 'table-header', flex: 1  },
-        { field: 'settings', headerName: 'Settings', width: 200, hideable: true, renderCell: (params)=> (<Button variant='contained' color='warning' onClick={()=>{console.log(params.id)}}>Update</Button>), headerClassName: 'table-header' },
+        { field: 'id', headerName: <strong>ID</strong>, hideable: true, width: 200, headerClassName: 'table-header' },
+        { field: 'col1', headerName: 'Column 1', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
+        { field: 'col2', headerName: 'Column 2', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
+        { field: 'name', headerName: 'Name', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
+        { field: 'final', headerName: 'Final', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
+        { field: 'pay', headerName: 'Payment', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
+        { field: 'address', headerName: 'Address', minWidth: 200, hideable: true, headerClassName: 'table-header'  },
+        { field: 'settings', headerName: 'Settings', minWidth: 200, hideable: true, renderCell: (params)=> (<Button variant='contained' color='warning' onClick={()=>{console.log(params.id)}}>Update</Button>), headerClassName: 'table-header' },
       ];
 
       const items = [
@@ -40,10 +42,9 @@ const NewTable = () => {
 
   return (
     <>
-        <div style={{ maxHeight: '80vh', width: '100%',overflow: 'auto' }}>
         <Grid container marginY={1} columnSpacing={1}>
         <Grid item xs={12} md={6} lg={2}>
-            <NewSelect none value={selectedCol} onChange={handleSelect} label={'Select Column'}>
+            <NewSelect id={'selector'} none value={selectedCol} onChange={handleSelect} label={'Select Column'}>
                 {columns.map(col=>(
                     <option value={col.field}>{col.headerName}</option>
                 ))}
@@ -53,6 +54,7 @@ const NewTable = () => {
                 <NewTextField id={'filter'} label={'Filter'} onChange={event => {setValue(event.target.value)}}/>
             </Grid>
         </Grid>
+        <div className='datadiv' >
         <DataGrid autoHeight rows={rows} columns={columns} slots={{toolbar: GridToolbar}} filterModel={{items}}/>
         </div>
     </>
