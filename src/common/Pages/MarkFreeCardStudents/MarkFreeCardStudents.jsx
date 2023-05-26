@@ -23,9 +23,9 @@ const MarkFreeCardStudents = () => {
     const getChip = (params) => {
         var payment;
         if(params.row.stat === 'paid'){
-            payment = 'PAID'
+            payment = 'PAID';
         }else{
-            payment = 'NOT-PAID'
+            payment = 'NOT-PAID';
         }
 
         return <Chip label={payment} variant='contained' color={payment === 'PAID'? 'success': 'error'}/>
