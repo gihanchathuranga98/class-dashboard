@@ -25,6 +25,9 @@ import DetailsOfTeachers from './common/Pages/DetailsOfTeachers/DetailsOfTeacher
 import MarkAttendanceManual from './common/Pages/MarkAttendanceManual/MarkAttendanceManual';
 import MarkPaymentManual from './common/Pages/MarkPaymentManual/MarkPaymentManual';
 import MarkFreeCardStudents from './common/Pages/MarkFreeCardStudents/MarkFreeCardStudents';
+import axios from 'axios';
+
+// axios.defaults.baseURL = 'http://localhost:4000';
 
 function App() {
   return (
