@@ -19,6 +19,15 @@ import MarkPaymentsBarcode from './common/Pages/MarkPaymentsBarcode/MarkPayments
 import AddNewAdmin from './SuperAdmin/AddNewAdmin/AddNewAdmin';
 import JustAddNewStudent from './common/Pages/JustAddNewStudent/JustAddNewStudent';
 import NewTable from './common/Pages/NewTable/NewTable';
+import AddStudentToClassManual from './common/Pages/AddStudentToClassManual/AddStudentToClassManual';
+import DetailsOfAdmins from './SuperAdmin/DetailsOfAdmins/DetailsOfAdmins';
+import DetailsOfTeachers from './common/Pages/DetailsOfTeachers/DetailsOfTeachers';
+import MarkAttendanceManual from './common/Pages/MarkAttendanceManual/MarkAttendanceManual';
+import MarkPaymentManual from './common/Pages/MarkPaymentManual/MarkPaymentManual';
+import MarkFreeCardStudents from './common/Pages/MarkFreeCardStudents/MarkFreeCardStudents';
+import axios from 'axios';
+
+// axios.defaults.baseURL = 'http://localhost:4000';
 
 function App() {
   return (
@@ -42,7 +51,12 @@ function App() {
           <Route path='/superadmin/markattendancebarcode' exact element={<MarkAttendanceBarcode/>}/>
           <Route path='/superadmin/markpaymentbarcode' exact element={<MarkPaymentsBarcode/>}/>
           <Route path='/superadmin/addnewadmin' exact element={<AddNewAdmin/>}/>
-          <Route path='/newtable' exact element={<NewTable/>}/>
+          <Route path='/superadmin/addstudenttoclassesmanual' exact element={<AddStudentToClassManual/>}/>
+          <Route path='/superadmin/detailsofadmins' exact element={<DetailsOfAdmins/>}/>
+          <Route path='/superadmin/detailsofteachers' exact element={<DetailsOfTeachers/>}/>
+          <Route path='/superadmin/markattendancemanual' exact element={<MarkAttendanceManual/>}/>
+          <Route path='/superadmin/markpaymentmanual' exact element={<MarkPaymentManual/>}/>
+          <Route path='/superadmin/markfreecardstudents' exact element={<MarkFreeCardStudents/>}/>
         </Routes>
       </Sidebar>
     </BrowserRouter>
