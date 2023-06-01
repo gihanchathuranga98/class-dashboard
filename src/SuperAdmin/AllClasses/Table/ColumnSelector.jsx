@@ -6,7 +6,7 @@ import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCi
 const PositionedMenu = ({values, setValues, allColumns}) => {
 
     const NewAllColumns = React.useMemo(() => allColumns, [])
-    console.clear()
+    
     console.log(allColumns[0])
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,7 +19,7 @@ const PositionedMenu = ({values, setValues, allColumns}) => {
   };
 
   const handleChange = (event) => {
-    console.clear();
+    ;
     console.log('handleChanges()');
     console.log(event.target.id);
     if (true){
@@ -27,7 +27,7 @@ const PositionedMenu = ({values, setValues, allColumns}) => {
         console.log(values);
         if (values.includes(event.target.id)){
             var vals = values.filter(val => val !== event.target.id)
-            console.clear();
+            ;
             console.log(vals)
             setValues(vals)
         }else {

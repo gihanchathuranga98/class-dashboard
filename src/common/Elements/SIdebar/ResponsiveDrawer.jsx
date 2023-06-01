@@ -17,11 +17,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/Auth-Context';
 
 const drawerWidth = 260;
 
 function ResponsiveDrawer({window, children, title}) {
 
+  const auth = React.useContext(AuthContext);
+  // continue from here...
   const nav = useNavigate();
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -36,72 +39,114 @@ function ResponsiveDrawer({window, children, title}) {
     inbox: <InboxIcon />
   }
 
-  const navs = [
-    {
-      text: 'Login',
-      nav: '/'
-    },
-    {
-      text: 'Owner Dashboard',
-      nav: '/ownerdashboard'
-    },
-    {
-      text: 'Add New Institute',
-      nav: '/owneraddnewinst'
-    },
-    {
-      text: 'List of Super Admins',
-      nav: '/ownerlistofsuperadmins'
-    },
-    {
-      text: 'Create Super Admins',
-      nav: '/ownercreatesuperadmin'
-    },
-    {
-      text: 'Change Password',
-      nav: '/changepassword'
-    },
-    {
-      text: 'S. A. Dashboard',
-      nav: '/superadmin/dashboard'
-    },
-    {
-      text: 'S. A. All Classes',
-      nav: '/superadmin/allclasses'
-    },
-    {
-      text: 'Chem Class',
-      nav: 'superadmin/class/10'
-    },
-    {
-      text: 'Add New Teacher',
-      nav: '/superadmin/addnewteacher'
-    },
-    {
-      text: 'Add New Student',
-      nav: '/superadmin/addnewstudent'
-    },
-    {
-      text: 'Add New Student B.',
-      nav: '/superadmin/addstudenttoclass'
-    },
-    {
-      text: 'Attendace Barcode',
-      nav: '/superadmin/markattendancebarcode'
-    },
-    {
-      text: 'Payment Barcode',
-      nav: '/superadmin/markpaymentbarcode'
-    },
-    {
-      text: 'Add New Class',
-      nav: '/superadmin/addnewclass'
-    },
-    {
-      text: 'New MUI Table',
-      nav: '/newtable'
+  // const navs = auth.isLoggedIn && auth.role == 201 ? [
+    
+  //   {
+  //     text: 'Owner Dashboard',
+  //     nav: '/ownerdashboard'
+  //   },
+  //   {
+  //     text: 'Add New Institute',
+  //     nav: '/owneraddnewinst'
+  //   },
+  //   {
+  //     text: 'List of Super Admins',
+  //     nav: '/ownerlistofsuperadmins'
+  //   },
+  //   {
+  //     text: 'Create Super Admins',
+  //     nav: '/ownercreatesuperadmin'
+  //   },
+  //   {
+  //     text: 'Change Password',
+  //     nav: '/changepassword'
+  //   },
+  //   {
+  //     text: 'S. A. Dashboard',
+  //     nav: '/superadmin/dashboard'
+  //   },
+  //   {
+  //     text: 'S. A. All Classes',
+  //     nav: '/superadmin/allclasses'
+  //   },
+  //   {
+  //     text: 'Chem Class',
+  //     nav: 'superadmin/class/10'
+  //   },
+  //   {
+  //     text: 'Add New Teacher',
+  //     nav: '/superadmin/addnewteacher'
+  //   },
+  //   {
+  //     text: 'Add New Student',
+  //     nav: '/superadmin/addnewstudent'
+  //   },
+  //   {
+  //     text: 'Add New Student B.',
+  //     nav: '/superadmin/addstudenttoclass'
+  //   },
+  //   {
+  //     text: 'Attendace Barcode',
+  //     nav: '/superadmin/markattendancebarcode'
+  //   },
+  //   {
+  //     text: 'Payment Barcode',
+  //     nav: '/superadmin/markpaymentbarcode'
+  //   },
+  //   {
+  //     text: 'Add New Class',
+  //     nav: '/superadmin/addnewclass'
+  //   },
+  //   {
+  //     text: 'New MUI Table',
+  //     nav: '/newtable'
+  //   }
+  // ] : [
+  //   {
+  //     text: 'Login',
+  //     nav: '/'
+  //   }
+  // ];
+
+  const getNavs = (role) => {
+    switch(role){
+      case 201:
+        return [
+          {
+            text: 'Owner Dashboard',
+            nav: '/ownerdashboard'
+          },
+          {
+            text: 'Add New Institute',
+            nav: '/owneraddnewinst'
+          },
+          {
+            text: 'List of Super Admins',
+            nav: '/ownerlistofsuperadmins'
+          },
+          {
+            text: 'Create Super Admins',
+            nav: '/ownercreatesuperadmin'
+          },
+          {
+            text: 'Change Password',
+            nav: '/changepassword'
+          }
+        ]
+
+      default:
+        return [
+          {
+            text: 'Login',
+            nav: '/'
+          }
+        ]
     }
-  ]
+  }
+
+
+  var navs = getNavs(auth.role);
+
 
   const handleClick = (index) => {
     nav(index)
