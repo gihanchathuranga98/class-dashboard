@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { Grid } from '@mui/material';
 import './NewTable.css'
@@ -6,7 +6,7 @@ import NewTextField from '../../Elements/TextFields/NewTextField';
 import NewSelect from '../../Elements/Select/NewSelect';
 
 
-const NewTable = ({rows, columns}) => {
+const NewTable = ({rows, columns, loading}) => {
 
     const memo_rows = React.useMemo(()=> rows);
     const memo_columns = React.useMemo(()=> columns);
@@ -42,7 +42,7 @@ const NewTable = ({rows, columns}) => {
             </Grid>
         </Grid>
         <div className='datadiv' >
-        <DataGrid autoHeight rows={memo_rows} columns={memo_columns} slots={{toolbar: GridToolbar}} filterModel={{items}}/>
+        <DataGrid autoHeight loading={loading} rows={memo_rows} columns={memo_columns} slots={{toolbar: GridToolbar}} filterModel={{items}}/>
         </div>
     </>
   )

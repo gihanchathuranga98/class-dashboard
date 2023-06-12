@@ -92,14 +92,11 @@ const Login = () => {
     try {
 
       const fetchData = async (token) => {
-        console.log('token ' + token);
         const result = checkToken(token);
         result.then(
           data => {
-            console.log('came before data');
             console.log(data);
             if(data){
-              console.log('came to data ' + data);
               const userData = JSON.parse(localStorage.getItem('userData'));
               auth.login(userData);
               navigate('/ownerdashboard');

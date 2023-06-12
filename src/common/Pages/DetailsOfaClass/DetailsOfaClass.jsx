@@ -99,7 +99,7 @@ const DetailsOfaClass = () => {
         <NewTextField label={'Payment Date'}/>
         <NewTextField label={'Payment'}/>
         <NewTextField label={'Payment Status'}/>
-        <Grid container spacing={1} fullWidth marginY={2}>
+        <Grid container spacing={1} marginY={2}>
             <Grid item xs={6}>
                 <Button fullWidth onClick={()=>{setOpen(false)}} variant="outlined">Close</Button>
             </Grid>

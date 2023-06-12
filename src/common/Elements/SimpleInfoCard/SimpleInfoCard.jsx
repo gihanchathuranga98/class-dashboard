@@ -11,7 +11,7 @@ export default function SimpleInfoCard({title, value, sx}) {
         <Typography sx={{ fontSize: 16 }} color="text.secondary" gutterBottom>
           {title}
         </Typography>
-        <Typography variant="h3" component="div">
+        <Typography variant="h3" sx={{display: 'flex', justifyContent: 'end'}} component="div">
           {value}
         </Typography>
       </CardContent>

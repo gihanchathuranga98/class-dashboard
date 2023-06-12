@@ -18,6 +18,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/Auth-Context';
+import { checkToken } from '../../Functions/checkUserValidity';
 
 const drawerWidth = 260;
 
@@ -28,12 +29,55 @@ function ResponsiveDrawer({window, children, title}) {
   const nav = useNavigate();
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [role, setRole] = React.useState(200);
 
   const web_title = title || "Revotech Solutions";
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  //#checking token validation
+  // React.useEffect(() => {
+  //   try {
+  //     console.log('came to responsive drawer');
+  //       const userData = localStorage.getItem('userData');
+  //       if(userData) { 
+  //           const token = JSON.parse(userData).token;
+  //           checkToken(token)
+  //           .then((data) => {
+  //               console.log('data has came', data);
+  //               if(!data){
+  //                   localStorage.removeItem('userData');
+  //                   // nav('/');
+  //               }
+  //           })
+  //           .catch((error) => {
+  //               localStorage.removeItem('userData');
+  //           })
+  //       }else{
+  //         nav('/');
+  //       }
+  //   } catch (error) {
+  //       console.error('error in useEffect | AddNewInstitute', error);
+  //       localStorage.removeItem('userData');
+  //       // nav('/');
+  //   }
+
+  //   }, []);
+
+  React.useEffect(() => {
+    try {
+      let userData = localStorage.getItem('userData');
+      if(userData) {
+        userData = JSON.parse(userData);
+        setRole(userData.user.role);
+        console.log('Role in drawer --------', role );
+      }
+    } catch (error) {
+      console.log('error in drawer', error);
+    }
+  }, [])
 
   const icon = {
     inbox: <InboxIcon />
@@ -108,7 +152,7 @@ function ResponsiveDrawer({window, children, title}) {
   //   }
   // ];
 
-  const getNavs = (role) => {
+  const getNavs = () => {
     switch(role){
       case 201:
         return [
@@ -145,7 +189,7 @@ function ResponsiveDrawer({window, children, title}) {
   }
 
 
-  var navs = getNavs(auth.role);
+  var navs = getNavs(role);
 
 
   const handleClick = (index) => {

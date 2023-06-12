@@ -25,9 +25,18 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 // import MarkFreeCardStudents from './common/Pages/MarkFreeCardStudents/MarkFreeCardStudents';
 import { AuthContext } from './common/Contexts/Auth-Context';
 import { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
 
 
 function App() {
+
+  const userData = localStorage.getItem('userData');
+  if(userData){
+    const token = JSON.parse(userData).token;
+    axios.defaults.headers.post['Authorization'] = `Bearer ${token}`;
+    console.log('default header set ----------------');
+  }
+  
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState(0);
@@ -38,7 +47,6 @@ function App() {
 
   const login = useCallback((data)=>{
     try {
-      console.log(data);
       setIsLoggedIn(true);
       setToken(data.token);
       setRole(data.user.role);
@@ -56,9 +64,14 @@ function App() {
     setIsLoggedIn(false);
   }, []);
 
-  const getRoutes = (role) => {
+  const getRoutes = () => {
     try {
-      console.log('getRoutes() - ' + role);
+      console.log('came to routes', );
+      const userData = JSON.parse(localStorage.getItem('userData'));
+      if(userData === null){
+        return  <Route path='/' exact element={<Login/>}/>
+      }
+      const role = userData.user.role;
       switch(role){
         case 201:
           return (
@@ -70,7 +83,6 @@ function App() {
               <Route path='/changepassword' exact element={<ChangePassword/>}/>
             </>
           );
-        
         default:
           return  <Route path='/' exact element={<Login/>}/>
       }
@@ -105,7 +117,8 @@ function App() {
       <BrowserRouter>
         <Sidebar>
           <Routes>
-            {getRoutes(role)}
+            {getRoutes()}
+            <Route path='/' exact element={<Login/>}/>
           </Routes>
         </Sidebar>
       </BrowserRouter>
