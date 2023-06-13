@@ -6,7 +6,7 @@ import ListOfSuperAdmins from './Owner/ListOfSuperAdmins/ListOfSuperAdmins';
 import Sidebar from './common/Elements/SIdebar/ResponsiveDrawer'
 import ChangePassword from './common/Pages/ChangePassword/ChangePassword';
 import Login from './common/Pages/Login/Login';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import SuperAdminDashboard from './SuperAdmin/SuperAdminDashboard/SuperAdminDashboard'
 // import AllClasses from './SuperAdmin/AllClasses/AllClasses';
 // import DetailsOfaClass from './common/Pages/DetailsOfaClass/DetailsOfaClass';
@@ -29,6 +29,7 @@ import axios from 'axios';
 
 
 function App() {
+
 
   const userData = localStorage.getItem('userData');
   if(userData){
@@ -90,6 +91,13 @@ function App() {
       console.error(error);
     }
   }
+
+  useEffect(() => {
+    if(localStorage.getItem('userData')){
+      let token = JSON.parse(localStorage.getItem('userData')).token
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    }
+  }, [])
 
 
   // const routes = <>
