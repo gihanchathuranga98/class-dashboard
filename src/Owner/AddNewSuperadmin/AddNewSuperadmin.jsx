@@ -125,11 +125,45 @@ const AddNewSuperadmin = () => {
 
 //    ------------------------------------------- working area -----------------
 
+  const createNewSuperadmin = async (event) => {
+   try {
+    await axios.post('/owner/createsuperadmin', {
+        instId: event.instId,
+        name: event.superAdminName,
+        pwd: event.pwd,
+        cnfirmPwd: event.cnfirmPwd,
+        contact: event.contact,
+        email: event.email
+    })
+    .then(data => {
+        console.log('data | new super admin created -', data);
+        setLoading(false);
+        formik.handleReset();
+        enqueueSnackbar("New Super Admin Created...", {
+            variant: "success",
+            anchorOrigin: { horizontal: "right", vertical: "top" },
+          });
+    })
+    .catch(error => {
+        console.log('error | createSuperAdmin', error);
+        setLoading(false);
+    })
+   } catch (error) {
+    console.error('error in createNewSuperadmin()', error);
+   }
+  }
+
+
   const onSubmit = async (event) => {
     try {
         await checkUserDuplications({email: event.email})
-        .then(data => {
-            console.log('fucking availability', data);
+        .then(async data => {
+            if(data){
+                console.log('user is already available');
+            }else{
+                console.log('came to user does not exists');
+                createNewSuperadmin(event);
+            }
         })
         .catch(error => {
             console.log('error in fucking user availability', error);
@@ -141,32 +175,6 @@ const AddNewSuperadmin = () => {
 
 // -----------------------------------------------------------------------------
 
-    if(true){
-        console.log('user is already available');
-    }else{
-        console.log('came to user does not exists');
-        await axios.post('/owner/createsuperadmin', {
-            instId: event.instId,
-            name: event.superAdminName,
-            pwd: event.pwd,
-            cnfirmPwd: event.cnfirmPwd,
-            contact: event.contact,
-            email: event.email
-        })
-        .then(data => {
-            console.log('data | createSuperAdmin', data);
-            setLoading(false);
-            formik.handleReset();
-            enqueueSnackbar("New Super Admin Created...", {
-                variant: "success",
-                anchorOrigin: { horizontal: "right", vertical: "top" },
-              });
-        })
-        .catch(error => {
-            console.log('error | createSuperAdmin', error);
-            setLoading(false);
-        })
-    }
     setLoading(false)
     console.log('onSubmit event', event);
   };
