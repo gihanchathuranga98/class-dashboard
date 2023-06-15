@@ -17,14 +17,19 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Contexts/Auth-Context';
+import { checkToken } from '../../Functions/checkUserValidity';
 
 const drawerWidth = 260;
 
 function ResponsiveDrawer({window, children, title}) {
 
+  const auth = React.useContext(AuthContext);
+  // continue from here...
   const nav = useNavigate();
 
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [role, setRole] = React.useState(200);
 
   const web_title = title || "Revotech Solutions";
 
@@ -32,76 +37,160 @@ function ResponsiveDrawer({window, children, title}) {
     setMobileOpen(!mobileOpen);
   };
 
+  //#checking token validation
+  // React.useEffect(() => {
+  //   try {
+  //     console.log('came to responsive drawer');
+  //       const userData = localStorage.getItem('userData');
+  //       if(userData) { 
+  //           const token = JSON.parse(userData).token;
+  //           checkToken(token)
+  //           .then((data) => {
+  //               console.log('data has came', data);
+  //               if(!data){
+  //                   localStorage.removeItem('userData');
+  //                   // nav('/');
+  //               }
+  //           })
+  //           .catch((error) => {
+  //               localStorage.removeItem('userData');
+  //           })
+  //       }else{
+  //         nav('/');
+  //       }
+  //   } catch (error) {
+  //       console.error('error in useEffect | AddNewInstitute', error);
+  //       localStorage.removeItem('userData');
+  //       // nav('/');
+  //   }
+
+  //   }, []);
+
+  React.useEffect(() => {
+    try {
+      let userData = localStorage.getItem('userData');
+      if(userData) {
+        userData = JSON.parse(userData);
+        setRole(userData.user.role);
+        console.log('Role in drawer --------', role );
+      }
+    } catch (error) {
+      console.log('error in drawer', error);
+    }
+  }, [])
+
   const icon = {
     inbox: <InboxIcon />
   }
 
-  const navs = [
-    {
-      text: 'Login',
-      nav: '/'
-    },
-    {
-      text: 'Owner Dashboard',
-      nav: '/ownerdashboard'
-    },
-    {
-      text: 'Add New Institute',
-      nav: '/owneraddnewinst'
-    },
-    {
-      text: 'List of Super Admins',
-      nav: '/ownerlistofsuperadmins'
-    },
-    {
-      text: 'Create Super Admins',
-      nav: '/ownercreatesuperadmin'
-    },
-    {
-      text: 'Change Password',
-      nav: '/changepassword'
-    },
-    {
-      text: 'S. A. Dashboard',
-      nav: '/superadmin/dashboard'
-    },
-    {
-      text: 'S. A. All Classes',
-      nav: '/superadmin/allclasses'
-    },
-    {
-      text: 'Chem Class',
-      nav: 'superadmin/class/10'
-    },
-    {
-      text: 'Add New Teacher',
-      nav: '/superadmin/addnewteacher'
-    },
-    {
-      text: 'Add New Student',
-      nav: '/superadmin/addnewstudent'
-    },
-    {
-      text: 'Add New Student B.',
-      nav: '/superadmin/addstudenttoclass'
-    },
-    {
-      text: 'Attendace Barcode',
-      nav: '/superadmin/markattendancebarcode'
-    },
-    {
-      text: 'Payment Barcode',
-      nav: '/superadmin/markpaymentbarcode'
-    },
-    {
-      text: 'Add New Class',
-      nav: '/superadmin/addnewclass'
-    },
-    {
-      text: 'New MUI Table',
-      nav: '/newtable'
+  // const navs = auth.isLoggedIn && auth.role == 201 ? [
+    
+  //   {
+  //     text: 'Owner Dashboard',
+  //     nav: '/ownerdashboard'
+  //   },
+  //   {
+  //     text: 'Add New Institute',
+  //     nav: '/owneraddnewinst'
+  //   },
+  //   {
+  //     text: 'List of Super Admins',
+  //     nav: '/ownerlistofsuperadmins'
+  //   },
+  //   {
+  //     text: 'Create Super Admins',
+  //     nav: '/ownercreatesuperadmin'
+  //   },
+  //   {
+  //     text: 'Change Password',
+  //     nav: '/changepassword'
+  //   },
+  //   {
+  //     text: 'S. A. Dashboard',
+  //     nav: '/superadmin/dashboard'
+  //   },
+  //   {
+  //     text: 'S. A. All Classes',
+  //     nav: '/superadmin/allclasses'
+  //   },
+  //   {
+  //     text: 'Chem Class',
+  //     nav: 'superadmin/class/10'
+  //   },
+  //   {
+  //     text: 'Add New Teacher',
+  //     nav: '/superadmin/addnewteacher'
+  //   },
+  //   {
+  //     text: 'Add New Student',
+  //     nav: '/superadmin/addnewstudent'
+  //   },
+  //   {
+  //     text: 'Add New Student B.',
+  //     nav: '/superadmin/addstudenttoclass'
+  //   },
+  //   {
+  //     text: 'Attendace Barcode',
+  //     nav: '/superadmin/markattendancebarcode'
+  //   },
+  //   {
+  //     text: 'Payment Barcode',
+  //     nav: '/superadmin/markpaymentbarcode'
+  //   },
+  //   {
+  //     text: 'Add New Class',
+  //     nav: '/superadmin/addnewclass'
+  //   },
+  //   {
+  //     text: 'New MUI Table',
+  //     nav: '/newtable'
+  //   }
+  // ] : [
+  //   {
+  //     text: 'Login',
+  //     nav: '/'
+  //   }
+  // ];
+
+  const getNavs = () => {
+    switch(role){
+      case 201:
+        return [
+          {
+            text: 'Owner Dashboard',
+            nav: '/ownerdashboard'
+          },
+          {
+            text: 'Add New Institute',
+            nav: '/owneraddnewinst'
+          },
+          {
+            text: 'List of Super Admins',
+            nav: '/ownerlistofsuperadmins'
+          },
+          {
+            text: 'Create Super Admins',
+            nav: '/ownercreatesuperadmin'
+          },
+          {
+            text: 'Change Password',
+            nav: '/changepassword'
+          }
+        ]
+
+      default:
+        return [
+          {
+            text: 'Login',
+            nav: '/'
+          }
+        ]
     }
-  ]
+  }
+
+
+  var navs = getNavs(role);
+
 
   const handleClick = (index) => {
     nav(index)

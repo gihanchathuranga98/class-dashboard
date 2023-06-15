@@ -1,14 +1,18 @@
-import { Alert, Box, Button, Snackbar } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Button } from "@mui/material";
+import React, { useContext, useEffect, useReducer } from "react";
 import FormElement from "../../Elements/FormElement/FormElement";
 import NewTextField from "../../Elements/TextFields/NewTextField";
 import NewCheckbox from "../../Elements/Checkbox/NewCheckbox";
 import Joi from "joi";
 import axios from "axios";
-import NewAlert from "../../Elements/NewAlert/NewAlert";
 import { useSnackbar } from "notistack";
+import { INITIAL_STATE, actions, loginReducer } from "../../../reducers/loginReducer";
+import { AuthContext } from "../../Contexts/Auth-Context";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+
+  const auth = useContext(AuthContext);
 
   const input_schema = Joi.object({
     email: Joi.string()
@@ -17,46 +21,115 @@ const Login = () => {
     password: Joi.string().min(7).required(),
   });
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [validity, setValidity] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [open_info, setOpen_info] = useState(false);
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const [state, dispatch] = useReducer(loginReducer, INITIAL_STATE);
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    const { error, value } = input_schema.validate({ email, password });
+    const { error } = input_schema.validate({ email: state.email, password: state.password });
     if (error) {
-      setValidity(false);
+      dispatch({type: actions.SET_VALIDITY, payload: false});
     } else {
-      setValidity(true);
+      dispatch({type: actions.SET_VALIDITY, payload: true});
     }
-  }, [email, password]);
+  }, [state.email, state.password, input_schema]);
 
-  const handleLogin = async (event) => {
-    await axios.post('/login', {
-      email,
-      password
-    })
-    .then((data) => {
-      enqueueSnackbar('User logged in successfully', {variant: 'success', anchorOrigin: {horizontal: "right", vertical: 'top'}});
-      console.log(data);
-    })
-    .catch(err => {
-      enqueueSnackbar('Please re-check your credentials', {variant: 'error', anchorOrigin: {horizontal: "right", vertical: 'top'}});
-      console.log(err);
-    })
+
+
+  const handleLogin = async () => {
+    try {
+      dispatch({type: actions.SET_LOADER, payload: true});
+      await axios.post('/login', {
+        email: state.email,
+        password: state.password
+      })
+      .then((data) => {
+        auth.login(data.data);
+        enqueueSnackbar('User logged in successfully', {variant: 'success', anchorOrigin: {horizontal: "right", vertical: 'top'}});
+        navigate('/ownerdashboard');
+  
+      })
+      .catch(err => {
+        enqueueSnackbar('Please re-check your credentials', {variant: 'error', anchorOrigin: {horizontal: "right", vertical: 'top'}});
+        dispatch({type: actions.SET_LOADER, payload: false});
+        console.log(err);
+      })
+      
+    } catch (error) {
+      console.error(error);
+    }
   }
+
+  const checkToken = async (token) => {
+    try {
+      var result;
+      console.log('came to checkToken');
+      axios.defaults.headers.post['Authorization'] = `Bearer ${token}`;
+      await axios.post('/checktoken', {headers: {"Acess-Control-Allow-Origin": "*", "Authorization": "Bearer " + token, "Accept": "application/json"}})
+      .then((data) => {
+        console.log("response data");
+        console.log(data);
+        if(data.data.isValid){
+          console.log("is data valid - " + data.data.isValid);
+          result = true;
+        }else{
+          result = false;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        result = false;
+      })
+      console.log('before return - ' + result);
+      return result;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(()=>{
+    try {
+
+      const fetchData = async (token) => {
+        const result = checkToken(token);
+        result.then(
+          data => {
+            console.log(data);
+            if(data){
+              const userData = JSON.parse(localStorage.getItem('userData'));
+              auth.login(userData);
+              navigate('/ownerdashboard');
+            }else{
+              navigate('/')
+            }
+          }
+        )
+        .catch(err => {
+          console.error(err);
+        })
+      }
+
+      let userData;
+      if(localStorage.getItem('userData')){
+        userData = JSON.parse(localStorage.getItem('userData'));
+        const result = fetchData(userData.token)
+        .catch(error => {
+          console.log(error);
+
+          console.log('result ' + result);
+        })
+      }
+
+    } catch (error) {
+      console.error(error);
+    }
+  }, [auth, navigate]);
+
+
 
   return (
     <>
-      {/* <Snackbar  anchorOrigin={{vertical: 'top', horizontal: 'right'}} open={open} autoHideDuration={6000} onClose={() => {setOpen(false)}}>
-          <Alert onClose={() => {setOpen(false)}} severity="success" sx={{ width: '100%' , borderStyle: 'solid', borderColor: 'green', borderWidth: 3}}>
-            This is a success message!
-          </Alert>
-      </Snackbar> */}
-      <NewAlert type={'error'} open={open} onClose={()=>{setOpen(false)}} message={'Please Re-check Credentials..!'}/>
-      <NewAlert type={'info'} open={open_info} onClose={()=>{setOpen_info(false)}} message={'Please Re-check Credentials..!'}/>
       <form>
         <FormElement
           title={"LOGIN"}
@@ -69,8 +142,8 @@ const Login = () => {
             id={"email"}
             name={"email"}
             placeholder={"abc@email.com"}
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
+            onChange={(e) => {dispatch({type: actions.SET_EMAIL, payload: e.target.value})}}
+            value={state.email}
             type={"email"}
           />
           <NewTextField
@@ -79,8 +152,8 @@ const Login = () => {
             required
             id={"pwd"}
             name={"pwd"}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={state.password}
+            onChange={(e) => dispatch({type: actions.SET_PASSWORD, payload: e.target.value})}
             placeholder={"Enter your password"}
           />
           <NewCheckbox
@@ -89,12 +162,17 @@ const Login = () => {
             sx={{ marginLeft: 1, marginTop: 0 }}
           />
           <Box marginX={1} marginBottom={1}>
-            <Button onClick={handleLogin} fullWidth disabled={!validity} variant="contained">
-              Login
+            <Button onClick={handleLogin} fullWidth disabled={!state.validity || state.loader} variant="contained">
+            {
+              state.loader ? "Loading..." : 'Login'
+            }
             </Button>
           </Box>
           <Box marginX={1}>
-            <Button fullWidth>Forgot password</Button>
+            <Button fullWidth>Forgot password
+            
+            </Button>
+            
           </Box>
         </FormElement>
       </form>
